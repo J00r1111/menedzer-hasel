@@ -1,0 +1,82 @@
+<!--Marcin-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menedżer haseł</title>
+</head>
+<body>
+    <h1>Twoje loginy i hasła:</h1>
+    <ul id="list">
+    </ul>
+    <input placeholder="login, hasło, do czego" type="text" id="data">
+    <button onclick="Add()">Dodaj</button>
+    <script>
+             text = window.prompt("Podaj hasło: ");
+             do{
+        function Add(){
+            let data = document.getElementById('data').value;
+            let dataArrayString = window.localStorage.getItem('dataArray');
+            let dataArray = JSON.parse(dataArrayString);
+            if (dataArray === null){
+                dataArray = Array();
+            }
+            dataArray.push(data);
+            dataArrayString = JSON.stringify(dataArray);
+            window.localStorage.setItem('dataArray', dataArrayString);
+
+            document.getElementById('data').value = "";
+            Show();
+        }
+        function Show(){
+            let dataArrayString = window.localStorage.getItem('dataArray');
+            let dataArray = JSON.parse(dataArrayString);
+            list.innerHTML = "";
+            for(let i=0; i<dataArray.length; i++){
+                list.innerHTML += 
+                    "<li><button onclick=\"Remove("+i+")\">Usuń</button>" + dataArray[i] + "</li>";
+            }
+        }
+        function Remove(i){
+            let dataArrayString = window.localStorage.getItem('dataArray');
+            let dataArray = JSON.parse(dataArrayString);
+            dataArray.splice(i, 1);
+            dataArrayString = JSON.stringify(dataArray);
+            window.localStorage.setItem('dataArray', dataArrayString);
+            Show();
+        }
+        }while(text != 'admin');
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--Marcin-->
